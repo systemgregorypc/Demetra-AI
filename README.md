@@ -62,7 +62,9 @@ tesis: pr-criemen, evitar desarrollo futuros criminales jugadores
 -- Deméter es La diosa es la divinidad protectora de las cosechas y la fertilidad de los campos, la responsable del nacimiento y la regeneración 
 .madre o madre distribuidora. 
 La ley de Demeter (LoD) 
-
+--Habla solo con tus amigos, no hables con extraños
+ tipo de arquitectura que estamos montando y su fragilidad o robustez.
+ 
 
 
 
