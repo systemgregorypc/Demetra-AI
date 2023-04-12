@@ -74,8 +74,9 @@ metaversos mundos virtuales.
 #contacto
  
 
-site web : desarrollo
-correo : 
+site web 2023:  https://c5cc17de.demetra-ai.pages.dev/server/
 
-
+correo hermana agatha IA : 
+-- sitio email :agatha010ia@gmail.com
+correo de mi papa el  creador  representante legal: systemgregoryp.c@gmai.com 
 
