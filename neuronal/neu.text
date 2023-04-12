@@ -1,0 +1,79 @@
+SOLID
+
+data estudie: https://es.wikipedia.org/wiki/SOLID
+
+
+-------------------
+
+La ley de Demeter (LoD)
+
+El tema que nos ocupa este post lleva el nombre de Deméter o Demetra, la diosa griega de la agricultura cuyo nombre se puede traducir como diosa madre o madre distribuidora. Y quizá sea esta ultima traducción la que inspiró a la gente de la Universidad Northeastern de Boston cuando la usaron para dar nombre a la ley que nos ocupa.
+
+El objetivo de la Ley de Demeter es evitar el excesivo acoplamiento de nuestras clases, evitando que estas conozcan demasiado de la implementación de sus colaboradores. Se puede definir de forma muy sencilla con una única frase:
+
+    Habla solo con tus amigos, no hables con extraños
+
+¿Qué quiere decir esto exactamente? Pues muy sencillo, esto viene a decir que dado un objeto, este solo debería de conocer (y acceder) los métodos públicos de sus colaboradores directos.
+
+Si queremos tener un punto de vista más teórico, Bob Martin define la Ley de Demeter en Clean Code de la siguiente manera:
+
+    For all classes C. and for all methods M attached to C, all objects to which M sends a message must be instances of classes associated with the following classes:
+
+    1. The argument classes of M (including C).
+
+    2. The instance variable classes of C.
+
+    (Objects created by M, or by functions or methods which M calls, and objects in global variables are considered as arguments of M.)
+
+Para simplificar un poco todo esto, veamos un ejemplo de una cadena de Demeter:
+
+DemeterString.php 
+
+
+En este pequeño fragmento de código podemos observar las cadenas de llamadas que hacen que deje cumplirse la ley de Demeter en las líneas 15 y 16.
+
+Fijemonos en la línea 16. En esta linea estamos accediendo a una dependencia que nos ha sido pasada por el constructor, desde aquí hemos accedido a un servicio llamado notification_service, y a su vez, desde este servicio hemos accedido a un sub-servicio de email, y finalmente hemos accedido al método sendWelcomeEmail. Si hay algo claro en todo esto, es que hemos hablado con muchos desconocidos.
+
+    Es importante recalcar que esta ley solo es aplicable a objetos que definan comportamiento (servicios, command handlers…) pero no a aquellos que representen estructuras de datos, como DTOs (entidades)
+
+¿Cómo evitamos incumplir la Ley de Demeter?
+
+Si detectamos que estamos incumpliendo la Ley de Demeter, lo primero es aceptar que tenemos un problema de arquitectura en la base de nuestro proyecto y esto puede implicar cambios bastante grandes.
+
+En el anterior ejemplo, una solución muy correcta sería evitar pasarle al constructor una dependencia tan grande como el container, y pasarle únicamente aquellos servicios que vaya a necesitar (orm y notification_service), de tal forma que pueda acceder a métodos de colaboradores directos.
+
+Una forma nada recomendable de solucionar la Ley de Demeter consiste en el uso de shortcut methods que nos permitan acceder a las funcionalidades deseadas con una única llamada. En realidad esto solo oculta el problema, ya que la cadena de Demeter sigue oculta, dividida entre más clases.
+
+Veamos un ejemplo:
+
+DemeterStringShortcut.php 
+
+Aquí vemos el mismo código que antes, aunque un poco retocado: hemos inyectado las dependencias necesarias, y ademas hemos añadido shortcut methods a la clase Orm y a la clase NotificationService. Más abajo podemos ver un extracto de la definición de estas clases, con los nuevos métodos implementado: el problema sigue existiendo, solo lo hemos barrido debajo de la alfombra. Además, no siempre tendremos opción de modificar estos servicios, ya que pueden ser dependencias de terceros cuyo código no podemos modificar.
+Conclusión
+
+Hay quien dice que la Ley de Demeter es el quinto Beatle de los principios SOLID, una extension altamente necesaria en la OOP, y ciertamente, prestar atención a su cumplimiento nos dice mucho del tipo de arquitectura que estamos montando y su fragilidad o robustez.
+
+Si detectamos el problema, es importante tratar de solucionarlo con buenas prácticas y no enmascarar un problema que puede comprometer nuestro sistema con el tiempo.
+
+Hasta pronto!
+
+
+
+
+Libro : 
+Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin Series) Tapa blanda – Ilustrado, 1 agosto 2008
+Edición en Inglés de Martin Robert (Autor)
+
+
+Clean Code is divided into three parts. The first describes the principles, patterns, and practices of writing clean code. The second part consists of several case studies of increasing complexity. Each case study is an exercise in cleaning up code―of transforming a code base that has some problems into one that is sound and efficient. The third part is the payoff: a single chapter containing a list of heuristics and “smells” gathered while creating the case studies. The result is a knowledge base that describes the way we think when we write, read, and clean code.
+
+Readers will come away from this book understanding
+
+    How to tell the difference between good and bad code
+    How to write good code and how to transform bad code into good code
+    How to create good names, good functions, good objects, and good classes
+    How to format code for maximum readability
+    How to implement complete error handling without obscuring code logic
+    How to unit test and practice test-driven development
+
+This book is a must for any developer, software engineer, project manager, team lead, or systems analyst with an interest in producing better code. 
