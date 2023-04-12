@@ -65,8 +65,17 @@ La ley de Demeter (LoD)
 --Habla solo con tus amigos, no hables con extraños
  tipo de arquitectura que estamos montando y su fragilidad o robustez.
  
+ #laboral
+trabaja en la area de innovacion y desarrollo en la empresa system gregory pc sucural - -ingeneria informatica & redes --estrategias de la lectura -- matematica --Diseñadora tecnologia video juegos  - eletronica microeletonica e bioeletronica , simulaciones consolas y app. 
+metaversos mundos virtuales. 
 
 
+
+#contacto
+ 
+
+site web : desarrollo
+correo : 
 
 
 
